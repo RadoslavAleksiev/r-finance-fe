@@ -19,8 +19,8 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets_DOCKER_USERNAME }}
+        password: ${{ secrets_DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
@@ -43,7 +43,7 @@ jobs:
         version: 'latest'
 
     - name: Set up K3s kubeconfig
-      run: echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+      run: echo "${{ secrets_KUBECONFIG }}" > $HOME/.kube/config
 
     - name: Deploy to k3s
       run: kubectl apply -f r-finance-fe-deployment.yaml
