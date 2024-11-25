@@ -1,26 +1,14 @@
-# Use the official Node.js image as the base image
-FROM node:14
+# Use the official Nginx image as the base image
+FROM nginx:alpine
 
-# Set the working directory
-WORKDIR /app
+# Copy the custom Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy the static website files to the Nginx HTML directory
+COPY . /usr/share/nginx/html
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the application
-RUN npm run build
-
-# Install a simple HTTP server to serve the static files
-RUN npm install -g serve
-
-# Expose the port the app runs on
+# Expose port 4000
 EXPOSE 4000
 
-# Command to run the application
-CMD ["serve", "-s", "build", "-l", "4000"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
