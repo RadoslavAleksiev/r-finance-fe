@@ -23,4 +23,4 @@ RUN npm install -g serve
 EXPOSE 4000
 
 # Command to run the application
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "build", "-l", "4000"]
