@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: r-finance-fe
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: r-finance-fe
@@ -14,9 +14,11 @@ spec:
     spec:
       containers:
       - name: r-finance-fe
-        image: your-dockerhub-username/r-finance-fe:latest
+        image: rado23/r-finance-fe:latest
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: regcred
 ---
 apiVersion: v1
 kind: Service
