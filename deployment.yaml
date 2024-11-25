@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: r-finance-fe
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: r-finance-fe
@@ -16,7 +16,7 @@ spec:
       - name: r-finance-fe
         image: your-dockerhub-username/r-finance-fe:latest
         ports:
-        - containerPort: 4000
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +29,5 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 4000
+    targetPort: 80
     nodePort: 30001
