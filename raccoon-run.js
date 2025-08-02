@@ -326,21 +326,30 @@ class RaccoonRunGame {
     });
   }
 
-  checkCollisions() {
-    if (this.isJumping) return;
-    const raccoonRect = this.raccoon.getBoundingClientRect();
-    for (let obstacle of this.obstacles) {
-      const rect = obstacle.element.getBoundingClientRect();
-      const hit =
-        raccoonRect.right > rect.left &&
-        raccoonRect.left < rect.right &&
-        raccoonRect.bottom > rect.top;
-      if (hit) {
-        this.endGame();
-        return;
-      }
+checkCollisions() {
+  if (this.isJumping) return;
+
+  const raccoonRect = this.raccoon.getBoundingClientRect();
+  for (let obstacle of this.obstacles) {
+    const rect = obstacle.element.getBoundingClientRect();
+
+    // Shrink trash can hitbox by reducing its width and height
+    const shrink = 10; // pixels to shrink from each side
+    const reducedLeft = rect.left + shrink;
+    const reducedRight = rect.right - shrink;
+    const reducedTop = rect.top + shrink;
+
+    const hit =
+      raccoonRect.right > reducedLeft &&
+      raccoonRect.left < reducedRight &&
+      raccoonRect.bottom > reducedTop;
+
+    if (hit) {
+      this.endGame();
+      return;
     }
   }
+}
 
   updateScoreDisplay() {
     this.currentScoreEl.textContent = this.score.toString().padStart(5, '0');
