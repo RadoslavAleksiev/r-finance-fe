@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>R-Finance - DeFi Platform</title>
+  <link rel="stylesheet" href="raccoon-run.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <script src="raccoon-run.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="logo.png" alt="R-Finance Logo">
+        <h1>Welcome to R-Finance</h1>
+        <p>Make your money work for you!</p>
+    </header>
+
+    <div class="social-media">
+        <a href="https://x.com/R_Finance_" target="_blank">Follow us on X</a>
+        <a href="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" target="_blank">Check us on Avascan</a>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#features">Features</a>
+        <a href="#rax-token">$RAX Token</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#avascan-stats">Avascan Statistics</a>
+        <a href="raccoon-run.html">Play to Earn $RCC</a>
+        <a href="index1.html">Make Money with R-Finance</a>
+    </nav>
+
+  <div id="gameContainer">
+    <div id="cloudsContainer">☁️ ☁️ ☁️</div>
+
+    <div id="scoreBoard">
+      <span>Score: <span id="currentScore">00000</span></span> |
+      <span>High: <span id="highScore">00000</span></span>
+    </div>
+
+    <div id="muteButton">🔊</div>
+
+    <img id="raccoon" src="images/raccoon-run-model-2d.png" alt="raccoon" />
+
+    <div id="obstaclesContainer"></div>
+    <div id="ground"></div>
+
+    <div id="startScreen" class="overlay-screen">
+      <div id="gameOverContent">
+        <h2>Start Raccoon Run!🦝</h2>
+        <p>Your Score: <span id="finalScore">0</span></p>
+        <p id="newHighScore" style="display: none; color: gold;">🎉 New High Score!</p>
+      </div>
+      <button id="startButton"><span id="actionText">start</span></button>
+      <p class="hint">Tap anywhere or press space to jump</p>
+    </div>
+  </div>
+
+  <!-- Leaderboard Section -->
+  <div id="leaderboard">
+    <h2>🏆 Top 10 Players 🏆</h2>
+    <form id="usernameForm">
+      <input type="text" id="username" placeholder="Wallet Address" required />
+      <label>
+        <input type="checkbox" id="captchaCheckbox" />
+        I am not a robot
+      </label>
+      <button type="submit">Submit Score</button>
+    </form>
+    <div id="errorMessage"></div>
+    <ol id="scoresList"></ol>
+  </div>
+
+  <!-- Sounds -->
+  <audio id="bgMusic" src="sounds/bg.mp3" loop></audio>
+  <audio id="jumpSound" src="sounds/jump.wav"></audio>
+  <audio id="gameOverSound" src="sounds/gameover.wav"></audio>
+
+    <section id="features" class="features">
+        <div class="feature-item">
+            <h2>Step 1</h2>
+            <p>Deposit into RAX pool in Trader Joe.</p>
+            <img src="/assets/stablesteps-img1-a182c4ed.png"> <!-- Depsit Assets -->
+        </div>
+        <div class="feature-item">
+            <h2>Step 2</h2>
+            <p>Relax and let the rewards be put to work.</p>
+            <p>Watch your assets grow.</p>
+            <img src="/assets/grow-stack-2c18ba23.png"> <!-- Assets Grow -->
+        </div>
+        <div class="feature-item">
+            <h2>Step 3</h2>
+            <p>Quarterly bonus and Airdrops</p>
+            <p>for the investitors.</p>
+            <img src="/assets/stablesteps-img4-0fe39736.png"> <!-- Reward System -->
+        </div>
+    </section>
+
+    <section id="rax-token" class="rax-token">
+        <h2>Raccoon Coin</h2>
+        <p>Total Supply: 999,000,000 RCC</p>
+        <p>Join our community and start earning today.</p>
+        <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank">Buy RCC</a>
+    </section>
+
+    <section id="roadmap" class="roadmap">
+        <h2>Roadmap</h2>
+        <ul>
+            <li>
+                <strong>Q4 2024:</strong>
+                <p>Private Pre-Sale RAX Token</p>
+            </li>
+            <li>
+                <strong>Q4 2024:</strong>
+                <p>RAX Token Launch</p>
+            </li>
+            <li>
+                <strong>Q4 2024:</strong>
+                <p>Liquidity Pool Launch in Trader Joe</p>
+            </li>
+            <li>
+                <strong>Q1 2025:</strong>
+                <p>Partnerships and Expansion</p>
+            </li>
+        </ul>
+    </section>
+
+    <section id="avascan-stats" class="avascan-stats">
+        <h2>Avascan Statistics</h2>
+        <div class="iframe-container">
+            <iframe src="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" width="100%" height="50%" style="border:none;"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 R-Finance. All rights reserved.</p>
+    </footer>
+    
+    <button onclick="topFunction()" id="myBtn" title="Go to top"></button> <!-- Back to Top Button -->
+
+
+</body>
+</html>

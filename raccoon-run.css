@@ -1,0 +1,242 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #cce7ff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 2vh;
+}
+
+#gameContainer {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  background: #a3d5ff;
+  overflow: hidden;
+  border: 4px solid #333;
+  border-radius: 10px;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 32px;
+  top: 20px;
+  animation: cloudMove linear forwards;
+}
+
+@keyframes cloudMove {
+  0% { right: -50px; }
+  100% { right: 100%; }
+}
+
+.moving {
+  animation-play-state: running;
+}
+
+#cloudsContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #8B4513;
+  z-index: 1;
+}
+
+#raccoon {
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  width: 60px;
+  height: 80px;
+  z-index: 2;
+}
+
+#raccoon.running {
+  animation: bounce 0.2s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+#raccoon.jumping {
+  animation: jump 0.6s ease-out;
+}
+
+@keyframes jump {
+  0% { bottom: 30px; }
+  50% { bottom: 130px; }
+  100% { bottom: 30px; }
+}
+
+#obstaclesContainer {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  height: 40px;
+  z-index: 3;
+}
+
+.trash-can {
+  position: absolute;
+  font-size: 28px;
+  bottom: 0;
+}
+
+.trash-can.moving {
+  animation-name: moveObstacle;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes moveObstacle {
+  0% { right: -40px; }
+  100% { right: 100%; }
+}
+
+#scoreBoard {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  z-index: 10;
+}
+
+#muteButton {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#startScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#startButton {
+  font-size: 20px;
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: 2px solid #333;
+  background: orange;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hint {
+  font-size: 14px;
+  color: #eee;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Leaderboard styling */
+#leaderboard {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 640px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #444;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#leaderboard h2 {
+  margin-bottom: 10px;
+  text-align: center;
+  color: #222;
+}
+
+#usernameForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+#usernameForm input[type="text"] {
+  padding: 6px;
+  width: 80%;
+  font-size: 16px;
+}
+
+#usernameForm label {
+  font-size: 14px;
+  color: #333;
+}
+
+#usernameForm button {
+  padding: 6px 16px;
+  font-weight: bold;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#scoresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#scoresList li {
+  padding: 4px 0;
+  font-size: 16px;
+  color: #222;
+  font-weight: 500;
+}
+
+#errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+
