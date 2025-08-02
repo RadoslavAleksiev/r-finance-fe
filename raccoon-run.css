@@ -99,6 +99,7 @@ body {
 
 .trash-can {
   position: absolute;
+  transform: scale(0.85);
   font-size: 28px;
   bottom: 0;
 }
