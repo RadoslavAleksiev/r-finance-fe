@@ -80,7 +80,7 @@ body {
 }
 
 #raccoon.jumping {
-  animation: jump 0.7s ease-out;
+  animation: jump 0.8s ease-out;
 }
 
 @keyframes jump {
