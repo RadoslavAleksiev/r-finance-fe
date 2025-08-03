@@ -334,7 +334,7 @@ checkCollisions() {
     const rect = obstacle.element.getBoundingClientRect();
 
     // Shrink trash can hitbox by reducing its width and height
-    const shrink = 10; // pixels to shrink from each side
+    const shrink = 15; // pixels to shrink from each side
     const reducedLeft = rect.left + shrink;
     const reducedRight = rect.right - shrink;
     const reducedTop = rect.top + shrink;
