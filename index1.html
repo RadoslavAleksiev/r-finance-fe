@@ -7,13 +7,609 @@
     <script src="/resources/script.js" defer></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1120941305623300" crossorigin="anonymous"></script>
     <title>Make Money with R-Finance - DeFi Platform</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        header img:hover {
+            transform: scale(1.05);
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        /* Social Media Buttons */
+        .social-media {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .social-media a {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            color: #fff;
+            padding: 12px 24px;
+            margin: 0 10px 10px 0;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-media a:hover {
+            background: #ff6b35;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 20px;
+            margin: 0 5px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Make Money Hero Section */
+        .make-money-hero {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .make-money-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .make-money-hero h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 30px;
+            color: #ff6b35;
+            position: relative;
+            z-index: 2;
+        }
+
+        .make-money-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Earning Methods Grid */
+        .earning-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .method-card {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .method-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .method-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+
+        .method-card h3 {
+            font-size: 1.8rem;
+            color: #ff6b35;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .method-card p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .method-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .method-card li {
+            margin: 12px 0;
+            padding-left: 25px;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .method-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .method-card .highlight {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            margin: 50px 0;
+            border-radius: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-item {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px 25px;
+            text-align: center;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .feature-item h2 {
+            color: #ff6b35;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-item p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .feature-item img {
+            width: 80%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Token Section */
+        .rax-token {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rax-token::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .rax-token h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rax-token p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rax-token a {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .rax-token a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Roadmap Section */
+        .roadmap {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            margin: 50px 0;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .roadmap h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #ff6b35;
+        }
+
+        .roadmap ul {
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+
+        .roadmap ul::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff6b35, #f7931e);
+        }
+
+        .roadmap li {
+            margin: 30px 0;
+            padding-left: 60px;
+            position: relative;
+        }
+
+        .roadmap li::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .roadmap li strong {
+            display: block;
+            font-size: 1.3rem;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .roadmap li p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Back to Top Button */
+        #myBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        #myBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            header {
+                padding: 20px 0;
+            }
+
+            .earning-methods {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .method-card {
+                padding: 30px 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-item,
+            .rax-token,
+            .roadmap,
+            .make-money-hero,
+            .stats-section {
+                padding: 25px 20px;
+            }
+
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .social-media a {
+                display: block;
+                margin: 10px auto;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .make-money-hero h2,
+            .rax-token h2,
+            .roadmap h2 {
+                font-size: 1.8rem;
+            }
+
+            .method-card h3,
+            .feature-item h2 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <img src="/assets/logo.jpg" alt="R-Finance Logo">
-            <h1>Welcome to R-Finance</h1>
-            <p>Make your money work for you!</p>
+            <h1>💰 Make Money with R-Finance</h1>
+            <p>Unlock Multiple Revenue Streams in DeFi!</p>
         </div>
     </header>
 
@@ -25,42 +621,113 @@
 
         <nav>
             <a href="index.html">🏠 Home</a>
-            <a href="#features">✨ Features</a>
-            <a href="#rax-token">🪙 $RCC Token</a>
-            <a href="#roadmap">🗺️ Roadmap</a>
-            <a href="#avascan-stats">📈 Statistics</a>
+            <a href="index.html#features">✨ Features</a>
+            <a href="index.html#rax-token">🪙 $RCC Token</a>
+            <a href="index.html#roadmap">🗺️ Roadmap</a>
+            <a href="index.html#avascan-stats">📈 Statistics</a>
             <a href="raccoon-run.html">🎮 Play to Earn</a>
             <a href="index1.html">💰 Make Money</a>
         </nav>
 
-        <section id="features" class="features">
+        <section class="make-money-hero">
+            <h2>🚀 Multiple Ways to Earn with R-Finance</h2>
+            <p>Discover the power of decentralized finance and turn your crypto assets into a passive income machine. Our platform offers multiple earning strategies designed for both beginners and advanced DeFi users.</p>
+        </section>
+
+        <!-- Earning Methods -->
+        <section class="earning-methods">
+            <div class="method-card">
+                <span class="method-icon">🏦</span>
+                <h3>Staking Rewards</h3>
+                <p>Stake your $RCC tokens in our secure staking pools and earn consistent passive income.</p>
+                <ul>
+                    <li>Up to <span class="highlight">10% APY</span> on staked tokens</li>
+                    <li>Daily reward distributions</li>
+                    <li>Flexible staking periods</li>
+                    <li>Compound interest available</li>
+                    <li>No minimum staking amount</li>
+                </ul>
+                <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank" class="cta-button">Start Staking</a>
+            </div>
+
+            <div class="method-card">
+                <span class="method-icon">💧</span>
+                <h3>Liquidity Providing</h3>
+                <p>Provide liquidity to our pools on Trader Joe and earn from trading fees and bonus rewards.</p>
+                <ul>
+                    <li>Earn trading fees from <span class="highlight">every transaction</span></li>
+                    <li>Additional bonus rewards in $RCC tokens</li>
+                    <li>Liquidity mining incentives</li>
+                    <li>Impermanent loss protection</li>
+                    <li>24/7 yield generation</li>
+                </ul>
+                <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank" class="cta-button">Add Liquidity</a>
+            </div>
+
+            <div class="method-card">
+                <span class="method-icon">🎁</span>
+                <h3>Bonus Airdrops</h3>
+                <p>Loyal token holders and active participants receive exclusive airdrops and bonus rewards.</p>
+                <ul>
+                    <li><span class="highlight">Quarterly bonus</span> distributions</li>
+                    <li>Special airdrops for long-term holders</li>
+                    <li>Community participation rewards</li>
+                    <li>Early access to new features</li>
+                    <li>Exclusive surprise rewards</li>
+                </ul>
+                <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank" class="cta-button">Join Community</a>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">$60K+</span>
+                    <span class="stat-label">Total Value Locked</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10%</span>
+                    <span class="stat-label">Average APY</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
             <div class="feature-item">
-                <h2>Step 1</h2>
-                <p>Deposit into $RCC pool in Raydium and start your DeFi journey with us.</p>
+                <h2>Step 1: Deposit</h2>
+                <p>Deposit your assets into $RCC pools on Raydium and start your DeFi journey with us.</p>
                 <img src="/assets/stablesteps-img1-a182c4ed.png" alt="Deposit Assets">
             </div>
             <div class="feature-item">
-                <h2>Step 2</h2>
-                <p>Relax and let the rewards be put to work.</p>
-                <p>Watch your assets grow automatically with our smart contracts.</p>
+                <h2>Step 2: Earn</h2>
+                <p>Relax and let the rewards be put to work. Watch your assets grow automatically with our smart contracts.</p>
                 <img src="/assets/grow-stack-2c18ba23.png" alt="Assets Grow">
             </div>
             <div class="feature-item">
-                <h2>Step 3</h2>
-                <p>Receive quarterly bonuses and airdrops for loyal investors and active participants.</p>
+                <h2>Step 3: Claim</h2>
+                <p>Receive quarterly bonuses and airdrops for loyal investors and active participants in our ecosystem.</p>
                 <img src="/assets/stablesteps-img4-0fe39736.png" alt="Reward System">
             </div>
         </section>
 
-        <section id="rax-token" class="rax-token">
+        <section class="rax-token">
             <h2>🦝 Raccoon Coin - $RCC</h2>
             <p>Total Supply: 999,000,000 $RCC</p>
-            <p>Join our community and start earning today with the power of DeFi.</p>
+            <p>Join our community and start earning today with the power of decentralized finance. Get your $RCC tokens now and unlock all earning opportunities!</p>
             <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank">Buy $RCC Now</a>
         </section>
 
-        <section id="roadmap" class="roadmap">
-            <h2>🗺️ Roadmap</h2>
+        <section class="roadmap">
+            <h2>🗺️ Roadmap to Financial Freedom</h2>
             <ul>
                 <li>
                     <strong>Q4 2025:</strong>
@@ -80,21 +747,170 @@
                 </li>
             </ul>
         </section>
-
-        <section id="avascan-stats" class="avascan-stats">
-            <h2>🦝 Raccoon Coin Analytics</h2>
-            <div class="iframe-container">
-                <iframe src="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" title="Raccoon Coin Statistics"></iframe>
-            </div>
-        </section>
     </div>
 
     <footer>
         <div class="container">
-            <p>© 2025 R-Finance. All rights reserved. | Empowering DeFi for everyone</p>
+            <p>© 2025 R-Finance. All rights reserved. | Start your DeFi journey today and make your money work for you!</p>
         </div>
     </footer>
     
     <button onclick="topFunction()" id="myBtn" title="Go to top">↑</button>
+
+    <script>
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back-to-Top Button
+        const myButton = document.getElementById("myBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                myButton.style.display = "flex";
+            } else {
+                myButton.style.display = "none";
+            }
+        };
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const finalValue = stat.textContent;
+                        const isPercentage = finalValue.includes('%');
+                        const isDollar = finalValue.includes(');
+                        const isPlus = finalValue.includes('+');
+                        
+                        let numValue = parseFloat(finalValue.replace(/[^0-9.]/g, ''));
+                        let currentValue = 0;
+                        const increment = numValue / 30;
+                        
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= numValue) {
+                                currentValue = numValue;
+                                clearInterval(timer);
+                            }
+                            
+                            let displayValue = Math.floor(currentValue);
+                            if (isDollar && displayValue >= 1000000) {
+                                displayValue = (displayValue / 1000000).toFixed(1) + 'M';
+                            } else if (displayValue >= 1000) {
+                                displayValue = displayValue.toLocaleString();
+                            }
+                            
+                            stat.textContent = (isDollar ? ' : '') + displayValue + (isPercentage ? '%' : '') + (isPlus ? '+' : '');
+                        }, 50);
+                    });
+                    
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Add hover effects for method cards
+        const methodCards = document.querySelectorAll('.method-card');
+        methodCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.make-money-hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+
+        // Add floating animation to CTA buttons
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        ctaButtons.forEach((button, index) => {
+            button.style.animation = `float 3s ease-in-out infinite`;
+            button.style.animationDelay = `${index * 0.5}s`;
+        });
+
+        // Add CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-5px); }
+            }
+            
+            .method-card:hover .method-icon {
+                transform: scale(1.1);
+                transition: transform 0.3s ease;
+            }
+            
+            .stat-item:hover .stat-number {
+                transform: scale(1.1);
+                transition: transform 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Intersection Observer for fade-in animations
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Apply fade-in to all major sections
+        const sections = document.querySelectorAll('.method-card, .feature-item, .stats-section, .roadmap');
+        sections.forEach((section, index) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
+            fadeObserver.observe(section);
+        });
+    </script>
 </body>
 </html>
