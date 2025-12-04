@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: r-finance-fe
-        image: rado23/r-finance-fe:latest
+        image: rado23/r-finance-fe:raccoon-test
         ports:
         - containerPort: 80
       imagePullSecrets:
