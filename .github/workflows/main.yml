@@ -1,0 +1,37 @@
+name: Manual CI/CD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   # ✅ GitHub runner OS
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set deployment version
+        run: echo "DEPLOY_VERSION=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+      - name: Build Alpine-based Docker image
+        run: |
+          docker build -t your-dockerhub-username/your-app:${DEPLOY_VERSION} -f Dockerfile .
+
+      - name: Login to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Push Docker image
+        run: docker push your-dockerhub-username/your-app:${DEPLOY_VERSION}
+
+      - name: SSH into Debian server and deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            git clone https://github.com/your-org/your-repo.git repo || (cd repo && git pull)
+            cd repo
+            kubectl set image deployment/your-deployment your-container=your-dockerhub-username/your-app:${DEPLOY_VERSION}
+            kubectl apply -f k8s/
