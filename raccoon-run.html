@@ -3,144 +3,1263 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>R-Finance - DeFi Platform</title>
-  <link rel="stylesheet" href="/resources/raccoon-run.css">
-  <link rel="stylesheet" href="/resources/styles.css">
-  <script src="/resources/script.js" defer></script>
-  <script src="/resources/raccoon-run.js"></script>
+  <title>Raccoon Run - R-Finance Play to Earn</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1120941305623300" crossorigin="anonymous"></script>
+  <style>
+    /* Global Styles - Matching index.html */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles - Matching index.html */
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    /* Social Media Buttons */
+    .social-media {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .social-media a {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.1);
+      border: 2px solid #ff6b35;
+      color: #fff;
+      padding: 12px 24px;
+      margin: 0 10px 10px 0;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-media a:hover {
+      background: #ff6b35;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    }
+
+    /* Navigation */
+    nav {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      text-align: center;
+      border-radius: 15px;
+      margin: 30px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      margin: 0 5px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background: rgba(255, 107, 53, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Game Container - Enhanced */
+    #gameContainer {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      aspect-ratio: 16 / 9;
+      background: #a3d5ff;
+      overflow: hidden;
+      border: 4px solid rgba(255, 107, 53, 0.5);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      margin: 30px auto;
+    }
+
+    .cloud {
+      position: absolute;
+      font-size: 32px;
+      top: 20px;
+      animation: cloudMove linear forwards;
+    }
+
+    @keyframes cloudMove {
+      0% { right: -50px; }
+      100% { right: 100%; }
+    }
+
+    .moving {
+      animation-play-state: running;
+    }
+
+    #cloudsContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30px;
+      background-color: #8B4513;
+      z-index: 1;
+    }
+
+    #raccoon {
+      position: absolute;
+      transform: scale(0.83);
+      bottom: 30px;
+      left: 50px;
+      width: 60px;
+      height: 80px;
+      z-index: 2;
+    }
+
+    #raccoon.running {
+      animation: bounce 0.2s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-3px); }
+    }
+
+    #raccoon.jumping {
+      animation: jump 0.8s ease-out;
+    }
+
+    @keyframes jump {
+      0% { bottom: 30px; }
+      50% { bottom: 180px; }
+      100% { bottom: 30px; }
+    }
+
+    #obstaclesContainer {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      height: 40px;
+      z-index: 3;
+    }
+
+    .trash-can {
+      position: absolute;
+      transform: scale(0.87);
+      font-size: 28px;
+      bottom: 0;
+    }
+
+    .trash-can.moving {
+      animation-name: moveObstacle;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+    }
+
+    @keyframes moveObstacle {
+      0% { right: -40px; }
+      100% { right: 100%; }
+    }
+
+    #scoreBoard {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 18px;
+      color: black;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    #muteButton {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #startScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    #startButton {
+      font-size: 20px;
+      padding: 10px 25px;
+      border-radius: 10px;
+      border: 2px solid #333;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    #startButton:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    }
+
+    .hint {
+      font-size: 14px;
+      color: #eee;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Leaderboard - Enhanced */
+    #leaderboard {
+      margin: 30px auto;
+      width: 100%;
+      max-width: 640px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    #leaderboard h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #ff6b35;
+      font-size: 2rem;
+    }
+
+    #usernameForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    #usernameForm input[type="text"] {
+      padding: 12px;
+      width: 80%;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    #usernameForm input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    #usernameForm label {
+      font-size: 14px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #usernameForm button {
+      padding: 12px 30px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #usernameForm button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    }
+
+    #scoresList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #scoresList li {
+      padding: 12px;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    #scoresList li:hover {
+      background: rgba(255, 107, 53, 0.1);
+      transform: translateX(5px);
+    }
+
+    #errorMessage {
+      color: #ff6b35;
+      font-size: 14px;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 50px 0;
+      padding: 0 20px;
+    }
+
+    .feature-item {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b35, #f7931e);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 107, 53, 0.3);
+    }
+
+    .feature-item h2 {
+      color: #ff6b35;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-item p {
+      margin-bottom: 20px;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .feature-item img {
+      width: 80%;
+      max-width: 200px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Token Section */
+    .rax-token {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      text-align: center;
+      margin: 50px 0;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rax-token::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .rax-token h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rax-token p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rax-token a {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: #fff;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rax-token a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Roadmap Section */
+    .roadmap {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 50px 40px;
+      margin: 50px 0;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .roadmap h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #ff6b35;
+    }
+
+    .roadmap ul {
+      list-style: none;
+      padding: 0;
+      position: relative;
+    }
+
+    .roadmap ul::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #ff6b35, #f7931e);
+    }
+
+    .roadmap li {
+      margin: 30px 0;
+      padding-left: 60px;
+      position: relative;
+    }
+
+    .roadmap li::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    }
+
+    .roadmap li strong {
+      display: block;
+      font-size: 1.3rem;
+      color: #ff6b35;
+      margin-bottom: 10px;
+    }
+
+    .roadmap li p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* Avascan Stats */
+    .avascan-stats {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      text-align: center;
+      margin: 50px 0;
+      border-radius: 20px;
+    }
+
+    .avascan-stats h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ff6b35;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      text-align: center;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Back to Top Button */
+    #myBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 20px;
+      width: 60px;
+      height: 60px;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+      transition: all 0.3s ease;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #myBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      header {
+        padding: 20px 0;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+      }
+
+      .feature-item,
+      .rax-token,
+      .roadmap,
+      .avascan-stats {
+        padding: 25px 20px;
+      }
+
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+
+      .social-media a {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+      }
+
+      .iframe-container {
+        height: 300px;
+      }
+
+      #leaderboard {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .rax-token h2,
+      .roadmap h2,
+      .avascan-stats h2 {
+        font-size: 1.8rem;
+      }
+
+      .feature-item h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <img src="/assets/logo.jpg" alt="R-Finance Logo">
-        <h1>Welcome to R-Finance</h1>
-        <p>Make your money work for you!</p>
-    </header>
+  <header>
+    <div class="container">
+      <img src="/assets/logo.jpg" alt="R-Finance Logo">
+      <h1>🎮 Raccoon Run - Play to Earn</h1>
+      <p>Jump, dodge, and earn $RCC tokens!</p>
+    </div>
+  </header>
 
+  <div class="container">
     <div class="social-media">
-        <a href="https://x.com/R_Finance_" target="_blank">Follow us on X</a>
-        <a href="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" target="_blank">Check us on Avascan</a>
+      <a href="https://x.com/R_Finance_" target="_blank">🦝 Follow us on X</a>
+      <a href="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" target="_blank">📊 Check us on Avascan</a>
     </div>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="#features">Features</a>
-        <a href="#rax-token">$RAX Token</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#avascan-stats">Avascan Statistics</a>
-        <a href="raccoon-run.html">Play to Earn $RCC</a>
-        <a href="index1.html">Make Money with R-Finance</a>
+      <a href="index.html">🏠 Home</a>
+      <a href="index.html#features">✨ Features</a>
+      <a href="index.html#rax-token">🪙 $RCC Token</a>
+      <a href="index.html#roadmap">🗺️ Roadmap</a>
+      <a href="index.html#avascan-stats">📈 Statistics</a>
+      <a href="raccoon-run.html">🎮 Play to Earn</a>
+      <a href="index1.html">💰 Make Money</a>
     </nav>
 
-  <div id="gameContainer">
-    <div id="cloudsContainer">☁️ ☁️ ☁️</div>
+    <div id="gameContainer">
+      <div id="cloudsContainer">☁️ ☁️ ☁️</div>
 
-    <div id="scoreBoard">
-      <span>Score: <span id="currentScore">00000</span></span> |
-      <span>High: <span id="highScore">00000</span></span>
-    </div>
-
-    <div id="muteButton">🔊</div>
-
-    <img id="raccoon" src="images/raccoon-run-model-2d.png" alt="raccoon" />
-
-    <div id="obstaclesContainer"></div>
-    <div id="ground"></div>
-
-    <div id="startScreen" class="overlay-screen">
-      <div id="gameOverContent">
-        <h2>Start Raccoon Run!🦝</h2>
-        <p>Your Score: <span id="finalScore">0</span></p>
-        <p id="newHighScore" style="display: none; color: gold;">🎉 New High Score!</p>
+      <div id="scoreBoard">
+        <span>Score: <span id="currentScore">00000</span></span> |
+        <span>High: <span id="highScore">00000</span></span>
       </div>
-      <button id="startButton"><span id="actionText">start</span></button>
-      <p class="hint">Tap anywhere or press space to jump</p>
+
+      <div id="muteButton">🔊</div>
+
+      <img id="raccoon" src="images/raccoon-run-model-2d.png" alt="raccoon" />
+
+      <div id="obstaclesContainer"></div>
+      <div id="ground"></div>
+
+      <div id="startScreen" class="overlay-screen">
+        <div id="gameOverContent">
+          <h2>Start Raccoon Run!🦝</h2>
+          <p>Your Score: <span id="finalScore">0</span></p>
+          <p id="newHighScore" style="display: none; color: gold;">🎉 New High Score!</p>
+        </div>
+        <button id="startButton"><span id="actionText">start</span></button>
+        <p class="hint">Tap anywhere or press space to jump</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Leaderboard Section -->
-  <div id="leaderboard">
-    <h2>🏆 Top 10 Players 🏆</h2>
-    <form id="usernameForm">
-      <input type="text" id="username" placeholder="Wallet Address" required />
-      <label>
-        <input type="checkbox" id="captchaCheckbox" />
-        I am not a robot
-      </label>
-      <button type="submit">Submit Score</button>
-    </form>
-    <div id="errorMessage"></div>
-    <ol id="scoresList"></ol>
-  </div>
+    <!-- Leaderboard Section -->
+    <div id="leaderboard">
+      <h2>🏆 Top 10 Players 🏆</h2>
+      <form id="usernameForm">
+        <input type="text" id="username" placeholder="Wallet Address" required />
+        <label>
+          <input type="checkbox" id="captchaCheckbox" />
+          I am not a robot
+        </label>
+        <button type="submit">Submit Score</button>
+      </form>
+      <div id="errorMessage"></div>
+      <ol id="scoresList"></ol>
+    </div>
 
-  <!-- Sounds -->
-  <audio id="bgMusic" src="sounds/bg.mp3" loop></audio>
-  <audio id="jumpSound" src="sounds/jump.wav"></audio>
-  <audio id="gameOverSound" src="sounds/gameover.wav"></audio>
+    <!-- Sounds -->
+    <audio id="bgMusic" src="sounds/bg.mp3" loop></audio>
+    <audio id="jumpSound" src="sounds/jump.wav"></audio>
+    <audio id="gameOverSound" src="sounds/gameover.wav"></audio>
 
     <section id="features" class="features">
-        <div class="feature-item">
-            <h2>Step 1</h2>
-            <p>Deposit into RAX pool in Trader Joe.</p>
-            <img src="/assets/stablesteps-img1-a182c4ed.png"> <!-- Depsit Assets -->
-        </div>
-        <div class="feature-item">
-            <h2>Step 2</h2>
-            <p>Relax and let the rewards be put to work.</p>
-            <p>Watch your assets grow.</p>
-            <img src="/assets/grow-stack-2c18ba23.png"> <!-- Assets Grow -->
-        </div>
-        <div class="feature-item">
-            <h2>Step 3</h2>
-            <p>Quarterly bonus and Airdrops</p>
-            <p>for the investitors.</p>
-            <img src="/assets/stablesteps-img4-0fe39736.png"> <!-- Reward System -->
-        </div>
+      <div class="feature-item">
+        <h2>Step 1</h2>
+        <p>Deposit into $RCC pool in Raydium and start your DeFi journey with us.</p>
+        <img src="/assets/stablesteps-img1-a182c4ed.png" alt="Deposit Assets">
+      </div>
+      <div class="feature-item">
+        <h2>Step 2</h2>
+        <p>Relax and let the rewards be put to work.</p>
+        <p>Watch your assets grow automatically with our smart contracts.</p>
+        <img src="/assets/grow-stack-2c18ba23.png" alt="Assets Grow">
+      </div>
+      <div class="feature-item">
+        <h2>Step 3</h2>
+        <p>Receive quarterly bonuses and airdrops for loyal investors and active participants.</p>
+        <img src="/assets/stablesteps-img4-0fe39736.png" alt="Reward System">
+      </div>
     </section>
 
     <section id="rax-token" class="rax-token">
-        <h2>Raccoon Coin</h2>
-        <p>Total Supply: 999,000,000 RCC</p>
-        <p>Join our community and start earning today.</p>
-        <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank">Buy RCC</a>
+      <h2>🦝 Raccoon Coin - $RCC</h2>
+      <p>Total Supply: 999,000,000 $RCC</p>
+      <p>Join our community and start earning today with the power of DeFi.</p>
+      <a href="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" target="_blank">Buy $RCC Now</a>
     </section>
 
     <section id="roadmap" class="roadmap">
-        <h2>Roadmap</h2>
-        <ul>
-            <li>
-                <strong>Q4 2024:</strong>
-                <p>Private Pre-Sale RAX Token</p>
-            </li>
-            <li>
-                <strong>Q4 2024:</strong>
-                <p>RAX Token Launch</p>
-            </li>
-            <li>
-                <strong>Q4 2024:</strong>
-                <p>Liquidity Pool Launch in Trader Joe</p>
-            </li>
-            <li>
-                <strong>Q1 2025:</strong>
-                <p>Partnerships and Expansion</p>
-            </li>
-        </ul>
+      <h2>🗺️ Roadmap</h2>
+      <ul>
+        <li>
+          <strong>Q4 2025:</strong>
+          <p>Official Launch of Raccoon Coin!</p>
+        </li>
+        <li>
+          <strong>Q4 2025:</strong>
+          <p>Play to Earn Games!</p>
+        </li>
+        <li>
+          <strong>Q1 2026:</strong>
+          <p>Staking and Liquidity Pool Launch on Raydium!</p>
+        </li>
+        <li>
+          <strong>Q1 2026:</strong>
+          <p>Strategic Partnerships and Platform Expansion across multiple chains with enhanced earning features</p>
+        </li>
+      </ul>
     </section>
 
     <section id="avascan-stats" class="avascan-stats">
-        <h2>Avascan Statistics</h2>
-        <div class="iframe-container">
-            <iframe src="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" width="100%" height="50%" style="border:none;"></iframe>
-        </div>
+      <h2>🦝 Raccoon Coin Analytics</h2>
+      <div class="iframe-container">
+        <iframe src="https://pump.fun/coin/FWPYkfBeTVrDvB4ihkjRK8bADxz2pqDoQqHWzvhkpump" title="Raccoon Coin Statistics"></iframe>
+      </div>
     </section>
+  </div>
 
-    <footer>
-        <p>© 2025 R-Finance. All rights reserved.</p>
-    </footer>
-    
-    <button onclick="topFunction()" id="myBtn" title="Go to top"></button> <!-- Back to Top Button -->
+  <footer>
+    <div class="container">
+      <p>© 2025 R-Finance. All rights reserved. | Empowering DeFi for everyone</p>
+    </div>
+  </footer>
+  
+  <button onclick="topFunction()" id="myBtn" title="Go to top">↑</button>
 
+  <script>
+    // Raccoon Run Game - Vanilla JavaScript
+    class RaccoonRunGame {
+      constructor() {
+        this.gameState = 'waiting';
+        this.score = 0;
+        this.highScore = parseInt(localStorage.getItem('raccoon-high-score') || '0');
+        this.isJumping = false;
+        this.obstacles = [];
+        this.clouds = [];
+        this.gameSpeed = 2;
+        this.lastObstacleTime = 0;
+        this.lastCloudTime = 0;
 
+        this.scoreInterval = null;
+        this.gameLoop = null;
+
+        this.gameContainer = document.getElementById('gameContainer');
+        this.raccoon = document.getElementById('raccoon');
+        this.ground = document.getElementById('ground');
+        this.obstaclesContainer = document.getElementById('obstaclesContainer');
+        this.cloudsContainer = document.getElementById('cloudsContainer');
+        this.startScreen = document.getElementById('startScreen');
+        this.startButton = document.getElementById('startButton');
+        this.currentScoreEl = document.getElementById('currentScore');
+        this.highScoreEl = document.getElementById('highScore');
+        this.finalScoreEl = document.getElementById('finalScore');
+        this.gameOverContent = document.getElementById('gameOverContent');
+        this.newHighScore = document.getElementById('newHighScore');
+        this.actionText = document.getElementById('actionText');
+
+        this.muteButton = document.getElementById('muteButton');
+        this.bgMusic = document.getElementById('bgMusic');
+        this.jumpSound = document.getElementById('jumpSound');
+        this.gameOverSound = document.getElementById('gameOverSound');
+        this.isMuted = false;
+
+        this.usernameForm = document.getElementById('usernameForm');
+        this.scoresList = document.getElementById('scoresList');
+        this.usernameInput = document.getElementById('username');
+        this.captchaCheckbox = document.getElementById('captchaCheckbox');
+        this.errorMessage = document.getElementById('errorMessage');
+        this.leaderboard = [];
+
+        this.init();
+      }
+
+      init() {
+        this.updateScoreDisplay();
+        this.setupEventListeners();
+        this.updateActionText();
+        this.updateMuteState();
+        this.initClouds();
+        this.fetchTopScores();
+      }
+
+      setupEventListeners() {
+        document.addEventListener('keydown', (e) => {
+          if (e.code === 'Space') {
+            e.preventDefault();
+            this.handleAction();
+          }
+        });
+
+        this.gameContainer.addEventListener('click', () => this.handleAction());
+        this.gameContainer.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          this.handleAction();
+        });
+
+        this.muteButton.addEventListener('click', () => this.toggleMute());
+        this.muteButton.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          this.toggleMute();
+        });
+
+        this.usernameForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const username = this.usernameInput.value.trim();
+          if (!/^[a-zA-Z0-9]+$/.test(username)) {
+            this.errorMessage.textContent = "Only alphanumeric characters are allowed.";
+            return;
+          }
+          if (!this.captchaCheckbox.checked) {
+            this.errorMessage.textContent = "Please confirm you're not a robot.";
+            return;
+          }
+
+          try {
+            const response = await fetch('https://r-finance.xyz/raccoon-api', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                query: `mutation SubmitScore($username: String!, $score: Int!) {
+                  submitScore(username: $username, score: $score) { id }
+                }`,
+                variables: { username, score: this.score }
+              })
+            });
+
+            const result = await response.json();
+            if (result.errors) throw new Error('Submission failed');
+
+            this.fetchTopScores();
+            this.errorMessage.textContent = "";
+          } catch {
+            this.errorMessage.textContent = "Failed to submit score.";
+          }
+
+          this.usernameInput.value = '';
+          this.captchaCheckbox.checked = false;
+        });
+      }
+
+      async fetchTopScores() {
+        try {
+          const response = await fetch('https://r-finance.xyz/raccoon-api', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              query: `
+                query {
+                  topScores(limit: 10) {
+                    username
+                    score
+                  }
+                }
+              `
+            })
+          });
+
+          const result = await response.json();
+          if (result.data && result.data.topScores) {
+            this.leaderboard = result.data.topScores;
+            this.refreshLeaderboardUI();
+          }
+        } catch (error) {
+          console.error('Failed to fetch leaderboard:', error);
+        }
+      }
+
+      toggleMute() {
+        this.isMuted = !this.isMuted;
+        this.updateMuteState();
+        this.muteButton.textContent = this.isMuted ? '🔇' : '🔊';
+      }
+
+      handleAction() {
+        if (this.gameState === 'waiting' || this.gameState === 'gameOver') {
+          this.startGame();
+        } else if (this.gameState === 'playing') {
+          this.jump();
+        }
+      }
+
+      startGame() {
+        this.gameState = 'playing';
+        this.score = 0;
+        this.obstacles = [];
+        this.clouds = [];
+        this.isJumping = false;
+        this.lastObstacleTime = 0;
+        this.lastCloudTime = 0;
+        this.gameSpeed = 2;
+
+        this.startScreen.classList.add('hidden');
+        this.gameOverContent.style.display = 'none';
+
+        this.ground.classList.add('moving');
+        this.raccoon.classList.add('running');
+        this.obstaclesContainer.innerHTML = '';
+        this.cloudsContainer.innerHTML = '';
+        this.initClouds();
+
+        try {
+          if (!this.isMuted) this.bgMusic.play();
+        } catch (e) {
+          console.warn('Audio play was blocked:', e);
+        }
+
+        this.startGameLoop();
+        this.startScoreCounter();
+        this.updateScoreDisplay();
+      }
+
+      jump() {
+        if (!this.isJumping && this.gameState === 'playing') {
+          this.isJumping = true;
+          this.raccoon.classList.add('jumping');
+          if (!this.isMuted) {
+            this.jumpSound.currentTime = 0;
+            this.jumpSound.play();
+          }
+
+          setTimeout(() => {
+            this.isJumping = false;
+            this.raccoon.classList.remove('jumping');
+          }, 600);
+        }
+      }
+
+      endGame() {
+        this.gameState = 'gameOver';
+        this.ground.classList.remove('moving');
+        this.raccoon.classList.remove('running');
+
+        this.stopGameLoop();
+        this.stopScoreCounter();
+
+        if (!this.isMuted) {
+          this.bgMusic.pause();
+          this.bgMusic.currentTime = 0;
+          this.gameOverSound.play();
+        }
+
+        if (this.score > this.highScore) {
+          this.highScore = this.score;
+          localStorage.setItem('raccoon-high-score', this.highScore.toString());
+          this.newHighScore.style.display = 'block';
+        } else {
+          this.newHighScore.style.display = 'none';
+        }
+
+        this.finalScoreEl.textContent = this.score;
+        this.gameOverContent.style.display = 'block';
+        this.updateActionText();
+        this.startScreen.classList.remove('hidden');
+        this.updateScoreDisplay();
+      }
+
+      startGameLoop() {
+        const loop = () => {
+          if (this.gameState !== 'playing') return;
+
+          const now = Date.now();
+          if (now - this.lastObstacleTime > 1500 + Math.random() * 1000) {
+            this.addObstacle();
+            this.lastObstacleTime = now;
+          }
+
+          if (now - this.lastCloudTime > 2000) {
+            this.addClouds();
+            this.lastCloudTime = now;
+          }
+
+          this.updateObstacles();
+          this.updateClouds();
+          this.checkCollisions();
+
+          this.gameLoop = requestAnimationFrame(loop);
+        };
+        this.gameLoop = requestAnimationFrame(loop);
+      }
+
+      stopGameLoop() {
+        if (this.gameLoop) {
+          cancelAnimationFrame(this.gameLoop);
+          this.gameLoop = null;
+        }
+      }
+
+      startScoreCounter() {
+        this.scoreInterval = setInterval(() => {
+          if (this.gameState === 'playing') {
+            this.score++;
+            if (this.score % 100 === 0) {
+              this.gameSpeed = Math.min(this.gameSpeed + 0.5, 8);
+            }
+            this.updateScoreDisplay();
+          }
+        }, 100);
+      }
+
+      stopScoreCounter() {
+        if (this.scoreInterval) {
+          clearInterval(this.scoreInterval);
+          this.scoreInterval = null;
+        }
+      }
+
+      addObstacle() {
+        const obstacle = document.createElement('div');
+        obstacle.className = 'trash-can moving';
+        obstacle.innerHTML = '🗑️';
+        obstacle.style.left = window.innerWidth + 'px';
+        obstacle.style.animationDuration = `${3 / this.gameSpeed}s`;
+
+        this.obstaclesContainer.appendChild(obstacle);
+        this.obstacles.push({ element: obstacle, x: window.innerWidth });
+      }
+
+      updateObstacles() {
+        this.obstacles = this.obstacles.filter(obstacle => {
+          obstacle.x -= this.gameSpeed;
+          obstacle.element.style.left = obstacle.x + 'px';
+          if (obstacle.x < -100) {
+            obstacle.element.remove();
+            return false;
+          }
+          return true;
+        });
+      }
+
+      addClouds() {
+        const count = Math.floor(Math.random() * 2) + 2;
+        for (let i = 0; i < count; i++) {
+          const cloud = document.createElement('div');
+          cloud.className = 'cloud moving';
+          cloud.textContent = '☁️';
+          cloud.style.left = window.innerWidth + i * 80 + 'px';
+          cloud.style.top = Math.random() * 80 + 'px';
+          this.cloudsContainer.appendChild(cloud);
+          this.clouds.push({ element: cloud, x: window.innerWidth + i * 80 });
+        }
+      }
+
+      updateClouds() {
+        this.clouds = this.clouds.filter(cloud => {
+          cloud.x -= 0.6;
+          cloud.element.style.left = cloud.x + 'px';
+          if (cloud.x < -100) {
+            cloud.element.remove();
+            return false;
+          }
+          return true;
+        });
+      }
+
+      checkCollisions() {
+        if (this.isJumping) return;
+
+        const raccoonRect = this.raccoon.getBoundingClientRect();
+        for (let obstacle of this.obstacles) {
+          const rect = obstacle.element.getBoundingClientRect();
+
+          const shrink = 15;
+          const reducedLeft = rect.left + shrink;
+          const reducedRight = rect.right - shrink;
+          const reducedTop = rect.top + shrink;
+
+          const hit =
+            raccoonRect.right > reducedLeft &&
+            raccoonRect.left < reducedRight &&
+            raccoonRect.bottom > reducedTop;
+
+          if (hit) {
+            this.endGame();
+            return;
+          }
+        }
+      }
+
+      updateScoreDisplay() {
+        this.currentScoreEl.textContent = this.score.toString().padStart(5, '0');
+        this.highScoreEl.textContent = this.highScore.toString().padStart(5, '0');
+      }
+
+      updateActionText() {
+        const action = this.gameState === 'waiting' ? 'Start' : 'Restart';
+        this.actionText.textContent = action;
+      }
+
+      updateMuteState() {
+        [this.bgMusic, this.jumpSound, this.gameOverSound].forEach(audio => {
+          audio.muted = this.isMuted;
+        });
+      }
+
+      refreshLeaderboardUI() {
+        this.scoresList.innerHTML = '';
+        this.leaderboard.forEach((entry, i) => {
+          const li = document.createElement('li');
+          li.textContent = `#${i + 1} ${entry.username}: ${entry.score}`;
+          this.scoresList.appendChild(li);
+        });
+      }
+
+      initClouds() {
+        this.addClouds();
+      }
+    }
+
+    // Init on DOM loaded
+    document.addEventListener('DOMContentLoaded', () => new RaccoonRunGame());
+
+    // Smooth Scroll for Navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Back-to-Top Button
+    const myButton = document.getElementById("myBtn");
+
+    window.onscroll = function() {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        myButton.style.display = "flex";
+      } else {
+        myButton.style.display = "none";
+      }
+    };
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
+    // Add loading animation
+    window.addEventListener('load', function() {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
 </body>
 </html>
