@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Raccoon Slots</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1120941305623300" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .social-media {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .social-media a {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.1);
+      border: 2px solid #ff6b35;
+      color: #fff;
+      padding: 12px 24px;
+      margin: 0 10px 10px 0;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-media a:hover {
+      background: #ff6b35;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      text-align: center;
+      border-radius: 15px;
+      margin: 30px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      margin: 0 5px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background: rgba(255, 107, 53, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .login-card {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      margin: 50px auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    .raccoon-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .login-card h2 {
+      color: #ff6b35;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .login-card p {
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 107, 53, 0.3);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff6b35;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    button {
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .dashboard-header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px 30px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .dashboard-header h2 {
+      color: #ff6b35;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .dashboard-header p {
+      opacity: 0.8;
+      margin: 0;
+    }
+
+    .logout-btn {
+      background: rgba(220, 53, 69, 0.2);
+      border: 2px solid #dc3545;
+      color: #dc3545;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-transform: none;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn:hover {
+      background: #dc3545;
+      color: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 107, 53, 0.3);
+    }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .stat-icon {
+      font-size: 1.5rem;
+    }
+
+    .stat-title {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stat-value.orange { color: #ff6b35; }
+    .stat-value.green { color: #22c55e; }
+    .stat-value.yellow { color: #f59e0b; }
+    .stat-value.blue { color: #3b82f6; }
+
+    .stat-subtitle {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+    }
+
+    .controls-panel {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .controls-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-transform: none;
+      font-size: 0.9rem;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      border-color: transparent;
+    }
+
+    .action-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-transform: none;
+      font-size: 0.9rem;
+      border: none;
+    }
+
+    .action-btn.blue {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+      border: 2px solid #3b82f6;
+    }
+
+    .action-btn.blue:hover {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .action-btn.green {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      border: 2px solid #22c55e;
+    }
+
+    .action-btn.green:hover {
+      background: #22c55e;
+      color: white;
+    }
+
+    .table-container {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    th {
+      padding: 15px 20px;
+      text-align: left;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #ff6b35;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      padding: 15px 20px;
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+
+    .wallet-code {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+
+    .amount {
+      color: #ff6b35;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-badge.paid {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .status-badge.pending {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-sm {
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-sm.green {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .btn-sm.green:hover {
+      background: #22c55e;
+      color: white;
+    }
+
+    .btn-sm.yellow {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+    }
+
+    .btn-sm.yellow:hover {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .btn-sm.red {
+      background: rgba(220, 53, 69, 0.2);
+      color: #dc3545;
+    }
+
+    .btn-sm.red:hover {
+      background: #dc3545;
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .footer-info {
+      text-align: center;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      text-align: center;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #myBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 20px;
+      width: 60px;
+      height: 60px;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+      transition: all 0.3s ease;
+      display: none;
+      text-transform: none;
+    }
+
+    #myBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      header {
+        padding: 20px 0;
+      }
+
+      .dashboard-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .controls-flex {
+        flex-direction: column;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+
+      .social-media a {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      th, td {
+        padding: 10px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img src="/assets/logo.jpg" alt="R-Finance Logo">
+      <h1>🦝 Raccoon Slots Admin</h1>
+      <p>Manage player wins and payouts</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="social-media">
+      <a href="https://x.com/R_Finance_" target="_blank">🦝 Follow us on X</a>
+      <a href="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" target="_blank">📊 Check us on Avascan</a>
+    </div>
+
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="index.html#features">✨ Features</a>
+      <a href="index.html#rax-token">🪙 $RCC Token</a>
+      <a href="index.html#roadmap">🗺️ Roadmap</a>
+      <a href="index.html#avascan-stats">📈 Statistics</a>
+      <a href="raccoon-run.html">🎮 Raccoon Run</a>
+      <a href="slot-game.html">🎰 Slot Game</a>
+      <a href="index1.html">💰 Make Money</a>
+    </nav>
+
+    <div id="app"></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 R-Finance. All rights reserved. | Empowering DeFi for everyone</p>
+    </div>
+  </footer>
+
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" id="myBtn" title="Go to top">↑</button>
+
+  <script>
+    const ADMIN_PASSWORD_HASH = 'e7a7d69be1ed0e82ca3cdae8af7f3502ea0db28646878b8beb47a0f5bd8cafae';
+    let isAuthenticated = false;
+    let wins = [];
+    let filter = 'unpaid';
+    let searchWallet = '';
+    let loading = false;
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function handleLogin() {
+      const password = document.getElementById('passwordInput').value;
+      const inputHash = await sha256(password);
+      
+      if (inputHash === ADMIN_PASSWORD_HASH) {
+        isAuthenticated = true;
+        await loadAllWins();
+        renderDashboard();
+      } else {
+        alert('Invalid password');
+      }
+    }
+
+    async function loadAllWins() {
+      loading = true;
+      renderDashboard();
+      
+      try {
+        const allKeys = await window.storage.list('win_', true);
+        wins = [];
+        
+        for (const key of allKeys.keys) {
+          try {
+            const result = await window.storage.get(key, true);
+            if (result) {
+              const winData = JSON.parse(result.value);
+              wins.push({ id: key, ...winData });
+            }
+          } catch (error) {
+            console.error('Error loading win:', key, error);
+          }
+        }
+        
+        wins.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      } catch (error) {
+        console.error('Failed to load wins:', error);
+        alert('Failed to load wins');
+      } finally {
+        loading = false;
+        renderDashboard();
+      }
+    }
+
+    async function markAsPaid(winId) {
+      try {
+        const result = await window.storage.get(winId, true);
+        if (result) {
+          const winData = JSON.parse(result.value);
+          winData.paid = true;
+          winData.paidAt = new Date().toISOString();
+          await window.storage.set(winId, JSON.stringify(winData), true);
+          await loadAllWins();
+          alert('Win marked as paid!');
+        }
+      } catch (error) {
+        console.error('Failed to mark as paid:', error);
+        alert('Failed to update');
+      }
+    }
+
+    async function markAsUnpaid(winId) {
+      try {
+        const result = await window.storage.get(winId, true);
+        if (result) {
+          const winData = JSON.parse(result.value);
+          winData.paid = false;
+          delete winData.paidAt;
+          await window.storage.set(winId, JSON.stringify(winData), true);
+          await loadAllWins();
+          alert('Win marked as unpaid!');
+        }
+      } catch (error) {
+        console.error('Failed to mark as unpaid:', error);
+        alert('Failed to update');
+      }
+    }
+
+    async function deleteWin(winId) {
+      if (!confirm('Are you sure you want to delete this win record?')) return;
+      
+      try {
+        await window.storage.delete(winId, true);
+        await loadAllWins();
+        alert('Win deleted!');
+      } catch (error) {
+        console.error('Failed to delete:', error);
+        alert('Failed to delete');
+      }
+    }
+
+    function exportToCSV() {
+      const filteredWins = getFilteredWins();
+      const headers = ['Timestamp', 'Wallet Address', 'Amount (points)', 'Symbols', 'Paid', 'Paid At'];
+      const rows = filteredWins.map(win => [
+        new Date(win.timestamp).toLocaleString(),
+        win.wallet,
+        win.amount,
+        win.symbols.join(' '),
+        win.paid ? 'Yes' : 'No',
+        win.paidAt ? new Date(win.paidAt).toLocaleString() : 'N/A'
+      ]);
+      
+      const csvContent = [
+        headers.join(','),
+        ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+      ].join('\\n');
+      
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `raccoon-wins-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+    }
+
+    function getFilteredWins() {
+      let filtered = wins;
+      
+      if (filter === 'paid') {
+        filtered = filtered.filter(win => win.paid);
+      } else if (filter === 'unpaid') {
+        filtered = filtered.filter(win => !win.paid);
+      }
+      
+      if (searchWallet.trim()) {
+        filtered = filtered.filter(win => 
+          win.wallet.toLowerCase().includes(searchWallet.toLowerCase())
+        );
+      }
+      
+      return filtered;
+    }
+
+    function getStats() {
+      const totalWins = wins.length;
+      const paidWins = wins.filter(w => w.paid).length;
+      const unpaidWins = wins.filter(w => !w.paid).length;
+      const totalAmount = wins.reduce((sum, w) => sum + w.amount, 0);
+      const paidAmount = wins.filter(w => w.paid).reduce((sum, w) => sum + w.amount, 0);
+      const unpaidAmount = wins.filter(w => !w.paid).reduce((sum, w) => sum + w.amount, 0);
+      const uniqueWallets = new Set(wins.map(w => w.wallet)).size;
+      
+      return { totalWins, paidWins, unpaidWins, totalAmount, paidAmount, unpaidAmount, uniqueWallets };
+    }
+
+    function renderLogin() {
+      document.getElementById('app').innerHTML = `
+        <div class="login-card">
+          <div class="raccoon-icon">🦝</div>
+          <h2>Admin Dashboard</h2>
+          <p>Enter password to access</p>
+          
+          <input type="password" id="passwordInput" placeholder="Enter admin password"
+            onkeypress="if(event.key==='Enter') handleLogin()">
+          <button onclick="handleLogin()">Login</button>
+        </div>
+      `;
+    }
+
+    function renderDashboard() {
+      if (!isAuthenticated) {
+        renderLogin();
+        return;
+      }
+
+      const stats = getStats();
+      const filteredWins = getFilteredWins();
+
+      document.getElementById('app').innerHTML = `
+        <div class="dashboard-header">
+          <div>
+            <h2>🦝 Admin Dashboard</h2>
+            <p>Manage player wins and payouts</p>
+          </div>
+          <button class="logout-btn" onclick="isAuthenticated=false; renderDashboard()">Logout</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">🏆</div>
+              <div class="stat-title">Total Wins</div>
+            </div>
+            <div class="stat-value orange">${stats.totalWins}</div>
+            <div class="stat-subtitle">${stats.totalAmount} points</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">✓</div>
+              <div class="stat-title">Paid Wins</div>
+            </div>
+            <div class="stat-value green">${stats.paidWins}</div>
+            <div class="stat-subtitle">${stats.paidAmount} points</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-title">Unpaid Wins</div>
+            </div>
+            <div class="stat-value yellow">${stats.unpaidWins}</div>
+            <div class="stat-subtitle">${stats.unpaidAmount} points</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">👥</div>
+              <div class="stat-title">Unique Players</div>
+            </div>
+            <div class="stat-value blue">${stats.uniqueWallets}</div>
+            <div class="stat-subtitle">wallet addresses</div>
+          </div>
+        </div>
+
+        <div class="controls-panel">
+          <div class="controls-flex">
+            <input type="text" class="search-input" value="${searchWallet}" placeholder="Search by wallet address..."
+              oninput="searchWallet=this.value; renderDashboard()">
+
+            <button class="filter-btn ${filter === 'all' ? 'active' : ''}" onclick="filter='all'; renderDashboard()">All</button>
+            <button class="filter-btn ${filter === 'unpaid' ? 'active' : ''}" onclick="filter='unpaid'; renderDashboard()">Unpaid</button>
+            <button class="filter-btn ${filter === 'paid' ? 'active' : ''}" onclick="filter='paid'; renderDashboard()">Paid</button>
+
+            <button class="action-btn blue" onclick="loadAllWins()" ${loading ? 'disabled' : ''}>
+              ${loading ? '🔄 Loading...' : '🔄 Refresh'}
+            </button>
+
+            <button class="action-btn green" onclick="exportToCSV()">📥 Export CSV</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <div class="table-wrapper">
+            ${loading ? `
+              <div class="loading-state">
+                <p>Loading wins...</p>
+              </div>
+            ` : filteredWins.length === 0 ? `
+              <div class="empty-state">
+                <p>No wins found</p>
+              </div>
+            ` : `
+              <table>
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Wallet</th>
+                    <th>Amount</th>
+                    <th>Symbols</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody
