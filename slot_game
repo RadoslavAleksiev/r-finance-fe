@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raccoon Slots - R-Finance Play to Earn</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1120941305623300" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .social-media {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .social-media a {
+      display: inline-block;
+      background: rgba(255, 107, 53, 0.1);
+      border: 2px solid #ff6b35;
+      color: #fff;
+      padding: 12px 24px;
+      margin: 0 10px 10px 0;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-media a:hover {
+      background: #ff6b35;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      text-align: center;
+      border-radius: 15px;
+      margin: 30px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      margin: 0 5px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    nav a:hover, nav a.active {
+      background: rgba(255, 107, 53, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .game-card {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 30px auto;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .game-card h2 {
+      color: #ff6b35;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .raccoon-icon {
+      text-align: center;
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: #ff6b35;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 107, 53, 0.3);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff6b35;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .info-box {
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .info-box h3 {
+      color: #ff6b35;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .info-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-box li {
+      padding: 5px 0;
+      opacity: 0.9;
+    }
+
+    .game-header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .player-info h2 {
+      color: #ff6b35;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .player-info p {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    .stats-container {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      background: rgba(255, 107, 53, 0.1);
+      border: 2px solid #ff6b35;
+      border-radius: 15px;
+      padding: 15px 25px;
+      text-align: center;
+      min-width: 100px;
+    }
+
+    .stat-box .value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff6b35;
+    }
+
+    .stat-box .label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 5px;
+    }
+
+    .game-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      background: rgba(255, 107, 53, 0.1);
+      border: 2px solid #ff6b35;
+      color: #ff6b35;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+      min-width: 45px;
+    }
+
+    .icon-btn:hover {
+      background: #ff6b35;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      background: rgba(220, 53, 69, 0.1);
+      border: 2px solid #dc3545;
+      color: #dc3545;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      width: auto;
+      text-transform: none;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn:hover {
+      background: #dc3545;
+      color: white;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    @media (min-width: 1024px) {
+      .game-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .slot-machine {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .win-notification {
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .win-notification h3 {
+      font-size: 1.8rem;
+      margin: 0;
+      color: white;
+    }
+
+    .reels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .reel {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      border: 3px solid #ff6b35;
+      border-radius: 15px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(3rem, 8vw, 5rem);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .reel.spinning {
+      animation: bounce 0.3s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .spin-button {
+      width: 100%;
+      padding: 20px;
+      font-size: 1.5rem;
+    }
+
+    .keyboard-hint {
+      text-align: center;
+      margin-top: 15px;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .keyboard-hint kbd {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .paytable, .recent-wins {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .paytable h3, .recent-wins h3 {
+      color: #ff6b35;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .paytable-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .paytable-item:hover {
+      background: rgba(255, 107, 53, 0.1);
+      transform: translateX(5px);
+    }
+
+    .paytable-item .symbol {
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+
+    .paytable-item .points {
+      color: #ff6b35;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .paytable-note {
+      text-align: center;
+      opacity: 0.7;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+
+    .win-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 2px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .win-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .win-amount {
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    .win-time {
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    .win-symbols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      padding: 30px 0;
+      text-align: center;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #myBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 20px;
+      width: 60px;
+      height: 60px;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    #myBtn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      header {
+        padding: 20px 0;
+      }
+
+      .game-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stats-container,
+      .game-controls {
+        justify-content: center;
+        width: 100%;
+      }
+
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+
+      .social-media a {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img src="/assets/logo.jpg" alt="R-Finance Logo">
+      <h1>🎰 Raccoon Slots - Play to Earn</h1>
+      <p>Spin, win, and earn $RCC tokens!</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="social-media">
+      <a href="https://x.com/R_Finance_" target="_blank">🦝 Follow us on X</a>
+      <a href="https://avascan.info/blockchain/c/token/0x55f677da44eD5D4ebf21C6d86fF0fCDE5f621ba8/holders" target="_blank">📊 Check us on Avascan</a>
+    </div>
+
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="index.html#features">✨ Features</a>
+      <a href="index.html#rax-token">🪙 $RCC Token</a>
+      <a href="index.html#roadmap">🗺️ Roadmap</a>
+      <a href="index.html#avascan-stats">📈 Statistics</a>
+      <a href="raccoon-run.html">🎮 Raccoon Run</a>
+      <a href="slot-game.html" class="active">🎰 Slot Game</a>
+      <a href="index1.html">💰 Make Money</a>
+    </nav>
+
+    <div id="app"></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 R-Finance. All rights reserved. | Empowering DeFi for everyone</p>
+    </div>
+  </footer>
+
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" id="myBtn" title="Go to top">↑</button>
+
+  <script>
+    const symbols = ['🦝', '🌙', '⭐', '🎰', '💎', '🍀', '🎪', '🎯'];
+    let wallet = '';
+    let isLoggedIn = false;
+    let spins = 0;
+    let totalWins = 0;
+    let history = [];
+    let soundEnabled = true;
+    let spinning = false;
+    let canStop = false;
+    let reels = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let captchaQuestion = { q: '', a: 0 };
+    let spinInterval = null;
+    let audioContext = null;
+
+    function init() {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      generateCaptcha();
+      renderLogin();
+      setupKeyboard();
+      setupScrollButton();
+    }
+
+    function setupScrollButton() {
+      window.onscroll = function() {
+        const btn = document.getElementById("myBtn");
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          btn.style.display = "block";
+        } else {
+          btn.style.display = "none";
+        }
+      };
+    }
+
+    function generateCaptcha() {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const ops = ['+', '-', '×'];
+      const op = ops[Math.floor(Math.random() * ops.length)];
+      let answer;
+      
+      switch(op) {
+        case '+': answer = num1 + num2; break;
+        case '-': answer = num1 - num2; break;
+        case '×': answer = num1 * num2; break;
+      }
+      
+      captchaQuestion = { q: `${num1} ${op} ${num2}`, a: answer };
+    }
+
+    function setupKeyboard() {
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && isLoggedIn) {
+          e.preventDefault();
+          if (spinning && canStop) {
+            stopSpin();
+          } else if (!spinning && spins > 0) {
+            spin();
+          }
+        }
+      });
+    }
+
+    function playSound(type) {
+      if (!soundEnabled || !audioContext) return;
+      
+      const ctx = audioContext;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      if (type === 'win') {
+        [523, 659, 784, 1047].forEach((f, i) => {
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.frequency.value = f;
+          g.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + i * 0.1 + 0.3);
+          o.start(ctx.currentTime + i * 0.1);
+          o.stop(ctx.currentTime + i * 0.1 + 0.3);
+        });
+      } else if (type === 'spin') {
+        osc.frequency.setValueAtTime(200, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.1);
+      }
+    }
+
+    async function saveWin(amount, symbolsArr) {
+      try {
+        const winId = `win_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        const winData = {
+          wallet: wallet,
+          amount: amount,
+          symbols: symbolsArr,
+          timestamp: new Date().toISOString(),
+          paid: false
+        };
+        await window.storage.set(winId, JSON.stringify(winData), true);
+      } catch (error) {
+        console.error('Failed to save win:', error);
+      }
+    }
+
+    function checkWin(newReels) {
+      let win = 0;
+      const rows = [
+        [newReels[0], newReels[1], newReels[2]],
+        [newReels[3], newReels[4], newReels[5]],
+        [newReels[6], newReels[7], newReels[8]]
+      ];
+      const cols = [
+        [newReels[0], newReels[3], newReels[6]],
+        [newReels[1], newReels[4], newReels[7]],
+        [newReels[2], newReels[5], newReels[8]]
+      ];
+      const diags = [
+        [newReels[0], newReels[4], newReels[8]],
+        [newReels[2], newReels[4], newReels[6]]
+      ];
+
+      [...rows, ...cols, ...diags].forEach(line => {
+        const symbol = symbols[line[0]];
+        if (line.every(idx => symbols[idx] === symbol)) {
+          if (symbol === '🦝') win += 100;
+          else if (symbol === '💎') win += 50;
+          else if (symbol === '🍀') win += 30;
+          else win += 20;
+        }
+      });
+
+      return win;
+    }
+
+    function spin() {
+      if (spins <= 0) {
+        alert('No spins remaining!');
+        return;
+      }
+
+      playSound('spin');
+      spinning = true;
+      canStop = false;
+
+      setTimeout(() => { canStop = true; renderGame(); }, 1000);
+
+      spinInterval = setInterval(() => {
+        reels = reels.map(() => Math.floor(Math.random() * symbols.length));
+        renderGame();
+      }, 100);
+    }
+
+    function stopSpin() {
+      if (!canStop) return;
+
+      clearInterval(spinInterval);
+      const finalReels = Array(9).fill(0).map(() => Math.floor(Math.random() * symbols.length));
+      reels = finalReels;
+      
+      const win = checkWin(finalReels);
+      
+      if (win > 0) {
+        setTimeout(() => playSound('win'), 300);
+        totalWins += win;
+        history = [{
+          time: new Date().toLocaleTimeString(),
+          win: win,
+          symbols: finalReels.map(i => symbols[i])
+        }, ...history].slice(0, 5);
+        
+        saveWin(win, finalReels.map(i => symbols[i]));
+        
+        setTimeout(() => {
+          document.getElementById('winNotification').classList.add('hidden');
+          renderGame();
+        }, 3000);
+      }
+      
+      spins--;
+      spinning = false;
+      canStop = false;
+      renderGame();
+      
+      if (win > 0) {
+        document.getElementById('winNotification').classList.remove('hidden');
+        document.getElementById('winAmount').textContent = win;
+      }
+    }
+
+    function handleLogin() {
+      const walletInput = document.getElementById('walletInput').value;
+      const captchaInput = parseInt(document.getElementById('captchaInput').value);
+
+      if (!walletInput.trim()) {
+        alert('Please enter your Solana wallet address');
+        return;
+      }
+      
+      if (captchaInput !== captchaQuestion.a) {
+        alert('Incorrect captcha answer');
+        generateCaptcha();
+        renderLogin();
+        return;
+      }
+
+      wallet = walletInput.trim();
+      spins = 10;
+      isLoggedIn = true;
+      totalWins = 0;
+      history = [];
+      renderGame();
+    }
+
+    function logout() {
+      isLoggedIn = false;
+      wallet = '';
+      spins = 0;
+      generateCaptcha();
+      renderLogin();
+    }
+
+    function renderLogin() {
+      document.getElementById('app').innerHTML = `
+        <div class="game-card">
+          <div class="raccoon-icon">🦝</div>
+          <h2>Connect Your Wallet</h2>
+          
+          <label>🔗 Solana Wallet Address</label>
+          <input type="text" id="walletInput" placeholder="Enter your Solana wallet address">
+          
+          <label>🔒 Captcha: What is ${captchaQuestion.q}?</label>
+          <input type="number" id="captchaInput" placeholder="Enter answer">
+          
+          <button onclick="handleLogin()">Connect & Get 10 Free Spins! 🎰</button>
+          
+          <div class="info-box">
+            <h3>🎯 How to Play:</h3>
+            <ul>
+              <li>• Enter your Solana wallet address</li>
+              <li>• Solve the simple math captcha</li>
+              <li>• Get 10 free spins to start!</li>
+              <li>• Match 3 symbols to win points!</li>
+              <li>• Press SPACE or click to spin/stop</li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGame() {
+      document.getElementById('app').innerHTML = `
+        <div class="game-header">
+          <div class="player-info">
+            <h2>🦝 Raccoon Slots</h2>
+            <p>Wallet: ${wallet.slice(0, 6)}...${wallet.slice(-4)}</p>
+          </div>
+          
+          <div class="stats-container">
+            <div class="stat-box">
+              <div class="value">${spins}</div>
+              <div class="label">Spins</div>
+            </div>
+            <div class="stat-box">
+              <div class="value">${totalWins}</div>
+              <div class="label">Wins</div>
+            </div>
+          </div>
+          
+          <div class="game-controls">
+            <button class="icon-btn" onclick="soundEnabled = !soundEnabled; playSound('spin')">
+              ${soundEnabled ? '🔊' : '🔇'}
+            </button>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <div class="game-grid">
+          <div class="slot-machine">
+            <div id="winNotification" class="win-notification hidden">
+              <h3>🎉 YOU WIN <span id="winAmount">0</span> POINTS! 🎉</h3>
+            </div>
+
+            <div class="reels">
+              ${reels.map((r) => `
+                <div class="reel ${spinning ? 'spinning' : ''}">
+                  ${symbols[r]}
+                </div>
+              `).join('')}
+            </div>
+
+            <button class="spin-button" onclick="${spinning && canStop ? 'stopSpin()' : 'spin()'}" 
+              ${(spinning && !canStop) || (!spinning && spins <= 0) ? 'disabled' : ''}>
+              ${spinning ? (canStop ? '⭐ STOP NOW! (SPACE) ⭐' : '🔄 SPINNING...') : (spins <= 0 ? 'NO SPINS LEFT' : '⭐ SPIN! (SPACE) ⭐')}
+            </button>
+            
+            <div class="keyboard-hint">
+              💡 Tip: Press <kbd>SPACE</kbd> to spin or stop anytime
+            </div>
+          </div>
+
+          <div class="sidebar">
+            <div class="paytable">
+              <h3>🏆 Paytable</h3>
+              ${[
+                { symbol: '🦝', name: 'Raccoon', points: 100 },
+                { symbol: '💎', name: 'Diamond', points: 50 },
+                { symbol: '🍀', name: 'Clover', points: 30 },
+                { symbol: '⭐', name: 'Star', points: 20 },
+                { symbol: '🌙', name: 'Moon', points: 20 },
+                { symbol: '🎰', name: 'Slot', points: 20 }
+              ].map(item => `
+                <div class="paytable-item">
+                  <div style="display: flex; align-items: center;">
+                    <span class="symbol">${item.symbol}</span>
+                    <span>${item.name}</span>
+                  </div>
+                  <span class="points">${item.points}pts</span>
+                </div>
+              `).join('')}
+              <div class="paytable-note">Match 3 in a row, column, or diagonal!</div>
+            </div>
+
+            ${history.length > 0 ? `
+              <div class="recent-wins">
+                <h3>🏆 Recent Wins</h3>
+                ${history.map(item => `
+                  <div class="win-item">
+                    <div class="win-header">
+                      <span class="win-amount">+${item.win} pts</span>
+                      <span class="win-time">${item.time}</span>
+                    </div>
+                    <div class="win-symbols">
+                      ${item.symbols.map(s => `<span>${s}</span>`).join('')}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    window.onload = init;
+    window.handleLogin = handleLogin;
+    window.logout = logout;
+    window.spin = spin;
+    window.stopSpin = stopSpin;
+  </script>
+</body>
+</html>
