@@ -388,6 +388,13 @@
       text-align: center;
     }
 
+    #successMessage {
+      color: #22c55e;
+      font-size: 14px;
+      margin-top: 5px;
+      text-align: center;
+    }
+
     /* Features Section */
     .features {
       display: grid;
@@ -756,9 +763,9 @@
 
     <!-- Leaderboard Section -->
     <div id="leaderboard">
-      <h2>🏆 Top 10 Players 🏆</h2>
+      <h2>💰 Save Your Score & Earn Money 💰</h2>
       <form id="usernameForm">
-        <input type="text" id="username" placeholder="Wallet Address" required />
+        <input type="text" id="username" placeholder="Solana Wallet Address" required />
         <label>
           <input type="checkbox" id="captchaCheckbox" />
           I am not a robot
@@ -766,6 +773,8 @@
         <button type="submit">Submit Score</button>
       </form>
       <div id="errorMessage"></div>
+      <div id="successMessage"></div>
+      <h3 style="color: #ff6b35; text-align: center; margin-top: 30px; margin-bottom: 15px;">🏆 Top 10 Players 🏆</h3>
       <ol id="scoresList"></ol>
     </div>
 
@@ -839,6 +848,10 @@
   <button onclick="topFunction()" id="myBtn" title="Go to top">↑</button>
 
   <script>
+    // Supabase Configuration
+    const SUPABASE_URL = 'https://wjuvuxsakwhrlrulviqv.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndqdXZ1eHNha3docmxydWx2aXF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYzMzU3OTUsImV4cCI6MjA4MTkxMTc5NX0.h5m8YKqvr8cyg6tPNw2MASCV9XrUJo7a4UYgaRvf7_4';
+
     // Raccoon Run Game - Vanilla JavaScript
     class RaccoonRunGame {
       constructor() {
@@ -880,6 +893,7 @@
         this.usernameInput = document.getElementById('username');
         this.captchaCheckbox = document.getElementById('captchaCheckbox');
         this.errorMessage = document.getElementById('errorMessage');
+        this.successMessage = document.getElementById('successMessage');
         this.leaderboard = [];
 
         this.init();
@@ -916,35 +930,36 @@
 
         this.usernameForm.addEventListener('submit', async (e) => {
           e.preventDefault();
-          const username = this.usernameInput.value.trim();
-          if (!/^[a-zA-Z0-9]+$/.test(username)) {
-            this.errorMessage.textContent = "Only alphanumeric characters are allowed.";
+          const wallet = this.usernameInput.value.trim();
+          
+          // Clear previous messages
+          this.errorMessage.textContent = "";
+          this.successMessage.textContent = "";
+
+          // Validate wallet address (basic validation for Solana address)
+          if (!wallet || wallet.length < 32) {
+            this.errorMessage.textContent = "Please enter a valid Solana wallet address.";
             return;
           }
+
           if (!this.captchaCheckbox.checked) {
             this.errorMessage.textContent = "Please confirm you're not a robot.";
             return;
           }
 
+          // Check if user has played at least once
+          if (this.score === 0) {
+            this.errorMessage.textContent = "Play at least one game before submitting your score!";
+            return;
+          }
+
           try {
-            const response = await fetch('https://r-finance.xyz/raccoon-api', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                query: `mutation SubmitScore($username: String!, $score: Int!) {
-                  submitScore(username: $username, score: $score) { id }
-                }`,
-                variables: { username, score: this.score }
-              })
-            });
-
-            const result = await response.json();
-            if (result.errors) throw new Error('Submission failed');
-
+            await this.saveScoreToSupabase(wallet, this.score);
+            this.successMessage.textContent = "✅ Score saved successfully! Check the leaderboard below.";
             this.fetchTopScores();
-            this.errorMessage.textContent = "";
-          } catch {
-            this.errorMessage.textContent = "Failed to submit score.";
+          } catch (error) {
+            this.errorMessage.textContent = "Failed to submit score. Please try again.";
+            console.error('Score submission error:', error);
           }
 
           this.usernameInput.value = '';
@@ -952,30 +967,84 @@
         });
       }
 
-      async fetchTopScores() {
+      async saveScoreToSupabase(wallet, score) {
         try {
-          const response = await fetch('https://r-finance.xyz/raccoon-api', {
+          const scoreData = {
+            wallet: wallet,
+            score: score,
+            timestamp: new Date().toISOString()
+          };
+
+          console.log('Saving score to Supabase:', scoreData);
+
+          const response = await fetch(`${SUPABASE_URL}/rest/v1/raccoon_scores`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              query: `
-                query {
-                  topScores(limit: 10) {
-                    username
-                    score
-                  }
-                }
-              `
-            })
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify(scoreData)
           });
 
-          const result = await response.json();
-          if (result.data && result.data.topScores) {
-            this.leaderboard = result.data.topScores;
-            this.refreshLeaderboardUI();
+          console.log('Supabase response status:', response.status);
+          const responseText = await response.text();
+          console.log('Supabase response text:', responseText);
+
+          if (!response.ok) {
+            // Parse error message if available
+            let errorMsg = `${response.status}`;
+            try {
+              const errorData = JSON.parse(responseText);
+              errorMsg = errorData.message || errorData.error || errorMsg;
+            } catch (e) {
+              errorMsg = responseText || errorMsg;
+            }
+            throw new Error(`Failed to save score: ${errorMsg}`);
           }
+          
+          console.log('Score saved to Supabase successfully!');
+        } catch (error) {
+          console.error('Failed to save score:', error);
+          throw error;
+        }
+      }
+
+      async fetchTopScores() {
+        try {
+          console.log('Fetching top scores from Supabase...');
+          const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/raccoon_scores?select=wallet,score,timestamp&order=score.desc&limit=10`,
+            {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Prefer': 'return=representation'
+              }
+            }
+          );
+
+          console.log('Response status:', response.status);
+          const responseText = await response.text();
+          console.log('Response text:', responseText);
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch top scores: ${response.status} - ${responseText}`);
+          }
+
+          const scores = responseText ? JSON.parse(responseText) : [];
+          console.log('Fetched top scores:', scores);
+          
+          this.leaderboard = scores;
+          this.refreshLeaderboardUI();
         } catch (error) {
           console.error('Failed to fetch leaderboard:', error);
+          // Don't show error to user on initial load, just show empty leaderboard
+          this.leaderboard = [];
+          this.refreshLeaderboardUI();
         }
       }
 
@@ -1208,9 +1277,21 @@
 
       refreshLeaderboardUI() {
         this.scoresList.innerHTML = '';
+        
+        if (this.leaderboard.length === 0) {
+          const li = document.createElement('li');
+          li.textContent = 'No scores yet. Be the first to submit!';
+          li.style.textAlign = 'center';
+          li.style.opacity = '0.7';
+          this.scoresList.appendChild(li);
+          return;
+        }
+        
         this.leaderboard.forEach((entry, i) => {
           const li = document.createElement('li');
-          li.textContent = `#${i + 1} ${entry.username}: ${entry.score}`;
+          const walletShort = `${entry.wallet.slice(0, 6)}...${entry.wallet.slice(-4)}`;
+          const date = new Date(entry.timestamp).toLocaleDateString();
+          li.textContent = `#${i + 1} ${walletShort}: ${entry.score} pts (${date})`;
           this.scoresList.appendChild(li);
         });
       }
