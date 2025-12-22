@@ -600,6 +600,10 @@
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})" id="myBtn" title="Go to top">↑</button>
 
   <script>
+    // Supabase Configuration
+    const SUPABASE_URL = 'https://wjuvuxsakwhrlrulviqv.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndqdXZ1eHNha3docmxydWx2aXF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYzMzU3OTUsImV4cCI6MjA4MTkxMTc5NX0.h5m8YKqvr8cyg6tPNw2MASCV9XrUJo7a4UYgaRvf7_4';
+
     const symbols = ['🦝', '🌙', '⭐', '🎰', '💎', '🍀', '🎪', '🎯'];
     let wallet = '';
     let isLoggedIn = false;
@@ -613,9 +617,29 @@
     let captchaQuestion = { q: '', a: 0 };
     let spinInterval = null;
     let audioContext = null;
+    let bgMusicAudio = null;
 
     function init() {
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      // Initialize background music with auto-loop
+      bgMusicAudio = new Audio('/sounds/slot-bg-music.mp3');
+      bgMusicAudio.loop = true;
+      bgMusicAudio.volume = 0.3;
+      
+      // Add event listener to restart if loop fails
+      bgMusicAudio.addEventListener('ended', function() {
+        if (soundEnabled && isLoggedIn) {
+          this.currentTime = 0;
+          this.play().catch(e => console.log('Music restart blocked:', e));
+        }
+      });
+      
+      // Add error handler for music file
+      bgMusicAudio.addEventListener('error', function(e) {
+        console.log('Music file not found or cannot load. Make sure /sounds/slot-bg-music.mp3 exists');
+      });
+      
       generateCaptcha();
       renderLogin();
       setupKeyboard();
@@ -693,19 +717,60 @@
       }
     }
 
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      if (bgMusicAudio) {
+        if (soundEnabled) {
+          bgMusicAudio.play().catch(e => console.log('Music play blocked:', e));
+        } else {
+          bgMusicAudio.pause();
+        }
+      }
+      renderGame();
+    }
+
+    function refillSpins() {
+      spins += 10;
+      alert('🎉 +10 Free Spins Added!');
+      renderGame();
+    }
+
     async function saveWin(amount, symbolsArr) {
       try {
-        const winId = `win_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         const winData = {
+          id: `win_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           wallet: wallet,
           amount: amount,
           symbols: symbolsArr,
           timestamp: new Date().toISOString(),
           paid: false
         };
-        await window.storage.set(winId, JSON.stringify(winData), true);
+
+        console.log('Saving win to Supabase:', winData);
+
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/wins`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(winData)
+        });
+
+        const responseText = await response.text();
+        console.log('Supabase response status:', response.status);
+        console.log('Supabase response:', responseText);
+
+        if (!response.ok) {
+          throw new Error(`Failed to save win: ${response.status} - ${responseText}`);
+        }
+        
+        console.log('Win saved to Supabase successfully!');
       } catch (error) {
         console.error('Failed to save win:', error);
+        alert('Warning: Win was not saved to database. Error: ' + error.message);
       }
     }
 
@@ -815,6 +880,12 @@
       isLoggedIn = true;
       totalWins = 0;
       history = [];
+      
+      // Start background music
+      if (bgMusicAudio && soundEnabled) {
+        bgMusicAudio.play().catch(e => console.log('Music autoplay blocked:', e));
+      }
+      
       renderGame();
     }
 
@@ -822,6 +893,13 @@
       isLoggedIn = false;
       wallet = '';
       spins = 0;
+      
+      // Stop background music
+      if (bgMusicAudio) {
+        bgMusicAudio.pause();
+        bgMusicAudio.currentTime = 0;
+      }
+      
       generateCaptcha();
       renderLogin();
     }
@@ -874,8 +952,11 @@
           </div>
           
           <div class="game-controls">
-            <button class="icon-btn" onclick="soundEnabled = !soundEnabled; playSound('spin')">
+            <button class="icon-btn" onclick="toggleSound()">
               ${soundEnabled ? '🔊' : '🔇'}
+            </button>
+            <button class="icon-btn" onclick="refillSpins()" title="Get +10 Free Spins">
+              ⚡
             </button>
             <button class="logout-btn" onclick="logout()">Logout</button>
           </div>
@@ -953,6 +1034,8 @@
     window.logout = logout;
     window.spin = spin;
     window.stopSpin = stopSpin;
+    window.toggleSound = toggleSound;
+    window.refillSpins = refillSpins;
   </script>
 </body>
 </html>
