@@ -911,7 +911,7 @@
           this.successMessage.textContent = "";
 
           // Validate wallet address (basic validation for Solana address)
-          if (!wallet || wallet.length < 32) {
+          if (!wallet || wallet.length < 5) {
             this.errorMessage.textContent = "Please enter a valid Solana wallet address.";
             return;
           }
