@@ -1,11 +1,10 @@
-
-name: Deploy via SSH (no external actions)
+name: Manual Deployment via SSH
 
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Git branch to build"
+        description: "Git branch to build and deploy"
         default: "raccoon-run-game-test-100"
         required: true
 
@@ -22,12 +21,13 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.ssh"
+          # Write private key
           echo "$SSH_PRIVATE_KEY" > "$HOME/.ssh/id_ed25519"
           chmod 600 "$HOME/.ssh/id_ed25519"
-          # Preload host key to avoid interactive prompt (optional)
+          # Preload host key to avoid interactive prompt (optional but recommended)
           ssh-keyscan -H "$SSH_HOST" >> "$HOME/.ssh/known_hosts" || true
 
-      - name: Deploy over SSH
+      - name: Deploy on server over SSH
         shell: bash
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -35,23 +35,33 @@ jobs:
           BRANCH: ${{ github.event.inputs.branch }}
         run: |
           set -euo pipefail
-          ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" << 'EOF'
-            set -e
+
+          # Pass BRANCH into the remote shell explicitly; keep the heredoc single-quoted for safety.
+          ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=yes "$SSH_USER@$SSH_HOST" "BRANCH='$BRANCH' bash -s" << 'EOF'
+            set -euo pipefail
+
+            echo "==> Using BRANCH=${BRANCH}"
             cd /root
 
-            # Refresh repo
+            echo "==> Validating branch exists in origin"
+            if ! git ls-remote --heads https://github.com/RadoslavAleksiev/r-finance-fe "${BRANCH}" | grep -q "${BRANCH}"; then
+              echo "Branch '${BRANCH}' not found in origin. Abort."
+              exit 1
+            fi
+
+            echo "==> Refreshing repository"
             rm -rf r-finance-fe || true
             git clone -b "${BRANCH}" https://github.com/RadoslavAleksiev/r-finance-fe
             cd r-finance-fe
 
-            # VM already authenticated to Docker Hub
+            echo "==> Building and pushing Docker image (VM already authenticated to Docker Hub)"
             docker build -t rado23/r-finance-fe:raccoon-test .
             docker push rado23/r-finance-fe:raccoon-test
 
-            # Restart deployment to apply new image
+            echo "==> Rolling restart of Kubernetes deployment"
             kubectl rollout restart deployment/r-finance-fe -n default
             kubectl rollout status deployment/r-finance-fe -n default --timeout=5m
 
-            # Optional visibility
-            kubectl -n default get pods -l app=r-finance-fe -o wide || true
+            echo "==> Current pods:"
+            kubectl get pods -n default -l app=r-finance-fe -o wide || true
           EOF
