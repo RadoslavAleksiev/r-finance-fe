@@ -1,0 +1,35 @@
+
+name: Deploy via SSH
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Git branch to build"
+        default: "raccoon-run-game-test-100"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and deploy
+        uses: appleboy/ssh-action@v0.1.12
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /root
+            rm -rf r-finance-fe || true
+            git clone -b "${{ github.event.inputs.branch }}" https://github.com/RadoslavAleksiev/r-finance-fe
+            cd r-finance-fe
+
+            # Build and push image (VM already authenticated to Docker Hub)
+            docker build -t rado23/r-finance-fe:raccoon-test .
+            docker push rado23/r-finance-fe:raccoon-test
+
+            # Restart deployment to apply new image
+            kubectl rollout restart deployment/r-finance-fe -n default
+            kubectl rollout status deployment/r-finance-fe -n default --timeout=5m
